@@ -5,15 +5,15 @@ A lightweight, GitHub-style calendar/activity heatmap component for **Vue 3**, w
 ## Install
 
 ```bash
-npm install vue3-calendar-heatmap-ts
+npm install @bactv/vue3-calendar-heatmap-ts
 ```
 
 ## Usage
 
 ```vue
 <script setup lang="ts">
-import { CalendarHeatmap } from 'vue3-calendar-heatmap-ts';
-import 'vue3-calendar-heatmap-ts/style.css'; // required — component styles ship as a separate CSS file
+import { CalendarHeatmap } from '@bactv/vue3-calendar-heatmap-ts';
+import '@bactv/vue3-calendar-heatmap-ts/style.css'; // required — component styles ship as a separate CSS file
 
 const values = [
   { date: '2025-01-03', count: 4 },
@@ -30,7 +30,7 @@ const values = [
     end-date="2025-12-31"
     :round="2"
     :dark-mode="false"
-    :range-color="['#ebedf0', '#ebedf0', '#c6e48b', '#7bc96f', '#239a3b', '#196127']"
+    :color="{ mainColor: '#196127' }"
     no-data-text="No activity"
     :tooltip-formatter="(v) => `${v.count} events on ${v.date}`"
   />
@@ -48,23 +48,13 @@ const values = [
 | `endDate` | `string` | — (required) | Inclusive end of the rendered range, e.g. `'2025-12-31'`. |
 | `round` | `number` (0-5) | `0` | Corner rounding of each cell. `0` = square, `5` = full circle (mapped linearly to `border-radius`). |
 | `darkMode` | `boolean` | `false` | Uses a built-in dark color scheme when `rangeColor` isn't provided. |
-| `rangeColor` | `string[]` | light/dark default palette | Color progression — see below. |
+| `color` | `{mainColor: string, mixBase: string}` | {mainColor: '#171717'} | Color progression. |
 | `max` | `number` | highest count in `values` | Upper bound used to distribute `rangeColor[2..]` across counts. |
 | `noDataText` | `string \| null` | `null` | Tooltip text for days with no matching entry. `null` shows no tooltip for those days. |
-| `tooltipFormatter` | `(value) => string` | built-in formatter | Formats the tooltip for days that **do** have a matching entry. |
+| `tooltipFormatter` | `(value) => string` | built-in formatter | Formats the tooltip for days that **do** have a matching entry. Support plain text and html format |
 | `vertical` | `boolean` | `false` | Renders weeks as rows instead of columns. |
 
 Emits: `day-click` — fired with `{ date, count, data }` when a rendered day cell is clicked.
-
-### `rangeColor` semantics
-
-```
-rangeColor[0] -> color for days with NO entry in `values` at all
-rangeColor[1] -> color for days with an entry whose count is 0
-rangeColor[2..] -> distributed evenly across counts from 1 up to `max`
-```
-
-For example, with the default palette and no `max` override, the color scale is stretched across the highest count value found in `values`.
 
 ## Development
 
