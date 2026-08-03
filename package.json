@@ -1,6 +1,6 @@
 {
   "name": "@bactv/vue-calendar-heatmap",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A GitHub-style calendar heatmap component for Vue 3, written in TypeScript.",
   "type": "module",
   "main": "./dist/calendar-heatmap.umd.cjs",
@@ -47,5 +47,9 @@
     "dev": "vite",
     "build": "vue-tsc -p tsconfig.build.json --noEmit && vite build",
     "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bactvdev/vue-calendar-heatmap"
   }
 }
